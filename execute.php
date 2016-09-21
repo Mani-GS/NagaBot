@@ -20,13 +20,13 @@ $text = trim($text);
 $text = strtolower($text);
 
 $response = '';
-$randRes = array('NAGA',
-'Io no capire',
-'Sono disoccupato',
-'Hahahahahahahahahahahahah NO.',
-'Non ci credo! Ma dai!!!',
-'E inveceeeeeee.',
-'Se non bestemmio, guarda!'
+$randRes = array("NAGA",
+"Io no capire",
+"Sono disoccupato",
+"Hahahahahahahahahahahahah NO.",
+"Non ci credo! Ma dai!!!",
+"E inveceeeeeee.",
+"Se non bestemmio, guarda!"
 );
 
 
@@ -37,11 +37,11 @@ if(isset($message['text'])){
 		$response = "Ciao? Buongiorno semmai, coglione!";
 	}
 	if(strpos($text, 'mouse') !== false){
-		$response = $response . "\n Uso il NAGAAAAAAAA, ovvio."
+		$response = "$response \n Uso il NAGAAAAAAAA, ovvio."
 	}
 	
 	if(strpos($text, 'ciao') !== true and strpos($text, 'mouse') !== true){
-		$response = $randRes[array_rand($randRes)];
+		$response = $randRes[array_rand($randRes,1)];
 	}
 }
 elseif(isset($message['audio'])){
