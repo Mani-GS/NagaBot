@@ -37,7 +37,7 @@ if(isset($message['text'])){
 		$response = "Ciao? Buongiorno semmai, coglione!";
 	}
 	if(strpos($text, 'mouse') !== false){
-		$response = "$response \n Uso il NAGAAAAAAAA, ovvio."
+		$response = "$response \n Uso il NAGAAAAAAAA, ovvio.";
 	}
 	
 	if(strpos($text, 'ciao') !== true and strpos($text, 'mouse') !== true){
