@@ -33,7 +33,7 @@ $randRes = array("NAGA",
 
 if(isset($message['text'])){
 	//$response = "Ho ricevuto il seguente messaggio di testo: " . $message['text'];
-	if(strpos($text, 'ciao') !== false){
+	if(strpos($text, "ciao") !== false){
 		$response = "Ciao? Buongiorno semmai, coglione!";
 	}
 	if(strpos($text, 'mouse') !== false){
