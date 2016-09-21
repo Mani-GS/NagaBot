@@ -41,7 +41,7 @@ if(isset($message['text'])){
 	}
 	
 	if(strpos($text, 'ciao') !== true and strpos($text, 'mouse') !== true){
-		$response = $randRes[array_rand($randRes,1)];
+		$response = $randRes[rand(0, 6)];
 	}
 }
 elseif(isset($message['audio'])){
