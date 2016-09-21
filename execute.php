@@ -35,9 +35,11 @@ if(isset($message['text'])){
 	//$response = "Ho ricevuto il seguente messaggio di testo: " . $message['text'];
 	if(strpos($text, "ciao") !== false){
 		$response = "Ciao? Buongiorno semmai, coglione!";
-	}else if(strpos($text, 'mouse') !== false){
-		$response = "$response \n Uso il NAGAAAAAAAA, ovvio.";
-	}else{
+	}
+	else if(strpos($text, 'mouse') !== false){
+		$response = "Uso il NAGAAAAAAAA, ovvio.";
+	}
+	else{
 		$response = $randRes[rand(0, 6)];
 	}
 }
