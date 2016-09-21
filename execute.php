@@ -19,7 +19,53 @@ $text = isset($message['text']) ? $message['text'] : "";
 $text = trim($text);
 $text = strtolower($text);
 
+$response = '';
+$randRes = array('',
+'',
+'',
+'',
+'',
+'',
+''
+);
+
+
+if(isset($message['text'])){
+	$response = "Ho ricevuto il seguente messaggio di testo: " . $message['text'];
+}
+elseif(isset($message['audio'])){
+	$response = "Sì sì, parla pure, ti ascolto.";
+}
+elseif(isset($message['document'])){
+	$response = "Cosa stracazzo mi stai inviando?";
+}
+elseif(isset($message['photo'])){
+	$response = "Madonna ma sei proprio orribile!! D:";
+}
+elseif(isset($message['sticker'])){
+	$response = "Ficcatelo";
+}
+elseif(isset($message['video'])){
+	$response = "Non li guardo i video in streaming, passano sempre virus";
+}
+elseif(isset($message['voice'])){
+	$response = "Te ne stai un po' zitto?";
+}
+elseif(isset($message['contact'])){
+	$response = "Guarda oggi non ho tempo, ti chiamo domani, giuro!";
+}
+elseif(isset($message['location'])){
+	$response = "No no, fanculo è dall'altra parte!";
+}
+elseif(isset($message['venue'])){
+	$response = "...";
+}
+else{
+	$response = "Per favore, parla potabile.";
+}
+
+
 header("Content-Type: application/json");
-$parameters = array('chat_id' => $chatId, "text" => $text);
+$parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
