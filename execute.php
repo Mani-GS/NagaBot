@@ -1,4 +1,5 @@
 <?php
+define("BOT_TOKEN", "251140608:AAHavKfqor2GyqYMf9p_DN6IJQw1KBVut3Q");
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
 
@@ -41,9 +42,9 @@ if(isset($message['text'])){
 	elseif(strpos($text, 'mouse') !== false){
 		$response = "Uso il NAGAAAAAAAA, ovvio.";
 	}
-	elseif(strpos($text, "costantini") !== false){
-		$type = "video";
-		$response = "https://nagabotel.herokuapp.com/video_costa.mov";
+	elseif(strpos($text, "vian") !== false){
+		$type = "foto";
+		//$response = new CURLFile(realpath("video_costa.mov"));
 	}
 	else{
 		$response = $randRes[rand(0, 6)];
@@ -81,22 +82,33 @@ else{
 }
 
 
-header("Content-Type: application/json");
-
 switch($type){
 	
 	case "text":
-	$parameters = array('chat_id' => $chatId, "text" => $response);
-	$parameters["method"] = "sendMessage";
+	
+		header("Content-Type: application/json");
+		$parameters = array('chat_id' => $chatId, 'text' => $response);
+		$parameters["method"] = "sendMessage";
+		echo json_encode($parameters);
+		
 	break;
 	
-	case "video":
-	$parameters = array('chat_id' => $chatId, "video" => $response);
-	$parameters["method"] = "sendVideo";
+	case "foto":
+	
+		$parameters = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("vian.jpg")), 'caption' => "Sssshh...");
+		//$parameters["method"] = "sendVideo";
+		$botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/sendPhoto";
+	
+		$ch = curl_init(); 
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: multipart/form-data"));
+		curl_setopt($ch, CURLOPT_URL, $botUrl); 
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
+	
+		$output = curl_exec($ch);
+		
 	break;
 }
-
-echo json_encode($parameters);
 
 
 
