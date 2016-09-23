@@ -52,7 +52,7 @@ if(isset($message['text'])){
 		$response = "Uso il NAGAAAAAAAA, ovvio.";
 	}
 	elseif(strpos($text, "battuta") !== false){
-		$response = $randJoke[rand(0, count($randJoke))];
+		$response = $randJoke[rand(0, count($randJoke) - 1)];
 	}
 	elseif(strpos($text, "costantini") !== false){
 		$type = "video";
@@ -65,7 +65,7 @@ if(isset($message['text'])){
 		$caption = "Beo come el soe... de notte.";
 	}
 	else{
-		$response = $randRes[rand(0, count($randRes))];
+		$response = $randRes[rand(0, count($randRes) - 1)];
 	}
 }
 elseif(isset($message['audio'])){
