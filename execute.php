@@ -30,7 +30,7 @@ $randRes = array("NAGA",
 "Se non bestemmio, guarda!"
 );
 
-$type = 'text';
+$type = "text";
 
 
 if(isset($message['text'])){
@@ -42,7 +42,7 @@ if(isset($message['text'])){
 		$response = "Uso il NAGAAAAAAAA, ovvio.";
 	}
 	elseif(strpos($text, "costantini") !== false{
-		$type = 'video';
+		$type = "video";
 		$response = "https://nagabotel.herokuapp.com/video_costa.mov";
 	}
 	else{
@@ -82,13 +82,15 @@ else{
 
 
 header("Content-Type: application/json");
+
 switch($type){
-	case 'text':
+	
+	case "text":
 	$parameters = array('chat_id' => $chatId, "text" => $response);
 	$parameters["method"] = "sendMessage";
 	break;
 	
-	case 'video':
+	case "video":
 	$parameters = array('chat_id' => $chatId, "video" => $response);
 	$parameters["method"] = "sendVideo";
 	break;
