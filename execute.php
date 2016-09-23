@@ -21,6 +21,7 @@ $text = trim($text);
 $text = strtolower($text);
 
 $response = '';
+$caption = '';
 
 $randRes = array("NAGA",
 "Io no capire",
@@ -42,9 +43,15 @@ if(isset($message['text'])){
 	elseif(strpos($text, 'mouse') !== false){
 		$response = "Uso il NAGAAAAAAAA, ovvio.";
 	}
+	elseif(strpos($text, "costantini") !== false){
+		$type = "video";
+		$response = new CURLFile(realpath("video_costa.mov"));
+		$caption = "Sssshh...";
+	}
 	elseif(strpos($text, "vian") !== false){
 		$type = "foto";
-		//$response = new CURLFile(realpath("video_costa.mov"));
+		$response = new CURLFile(realpath("vian.jpg"));
+		$caption = "Ou muso da merda!";
 	}
 	else{
 		$response = $randRes[rand(0, 6)];
@@ -95,8 +102,7 @@ switch($type){
 	
 	case "foto":
 	
-		$parameters = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("vian.jpg")), 'caption' => "Sssshh...");
-		//$parameters["method"] = "sendVideo";
+		$parameters = array('chat_id' => $chatId, 'photo' => $response, 'caption' => $caption);
 		$botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/sendPhoto";
 	
 		$ch = curl_init(); 
@@ -107,6 +113,21 @@ switch($type){
 	
 		$output = curl_exec($ch);
 		
+	break;
+	
+	case "video":
+	
+		$parameters = array('chat_id' => $chatId, 'video' => $response, 'caption' => $caption);
+		$botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/sendVideo";
+	
+		$ch = curl_init(); 
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: multipart/form-data"));
+		curl_setopt($ch, CURLOPT_URL, $botUrl); 
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
+	
+		$output = curl_exec($ch);
+	
 	break;
 }
 
