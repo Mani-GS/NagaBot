@@ -41,7 +41,7 @@ if(isset($message['text'])){
 	elseif(strpos($text, 'mouse') !== false){
 		$response = "Uso il NAGAAAAAAAA, ovvio.";
 	}
-	elseif(strpos($text, "costantini") !== false{
+	elseif(strpos($text, "costantini") !== false){
 		$type = "video";
 		$response = "https://nagabotel.herokuapp.com/video_costa.mov";
 	}
