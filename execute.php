@@ -20,6 +20,7 @@ $text = trim($text);
 $text = strtolower($text);
 
 $response = '';
+
 $randRes = array("NAGA",
 "Io no capire",
 "Sono disoccupato",
@@ -29,6 +30,7 @@ $randRes = array("NAGA",
 "Se non bestemmio, guarda!"
 );
 
+$type = 'text';
 
 
 if(isset($message['text'])){
@@ -36,8 +38,12 @@ if(isset($message['text'])){
 	if(strpos($text, "ciao") !== false){
 		$response = "Ciao? Buongiorno semmai, coglione!";
 	}
-	else if(strpos($text, 'mouse') !== false){
+	elseif(strpos($text, 'mouse') !== false){
 		$response = "Uso il NAGAAAAAAAA, ovvio.";
+	}
+	elseif(strpos($text, "costantini") !== false{
+		$type = 'video';
+		$response = "https://nagabotel.herokuapp.com/video_costa.mov";
 	}
 	else{
 		$response = $randRes[rand(0, 6)];
@@ -50,7 +56,7 @@ elseif(isset($message['document'])){
 	$response = "Cosa stracazzo mi stai inviando?";
 }
 elseif(isset($message['photo'])){
-	$response = "Madonna ma sei proprio orribile!! D:";
+	$response = "Non ho gli occhi, come stracazzo faccio a vederla? Pirla.";
 }
 elseif(isset($message['sticker'])){
 	$response = "Ficcatelo";
@@ -76,6 +82,37 @@ else{
 
 
 header("Content-Type: application/json");
-$parameters = array('chat_id' => $chatId, "text" => $response);
-$parameters["method"] = "sendMessage";
+switch($type){
+	case 'text':
+	$parameters = array('chat_id' => $chatId, "text" => $response);
+	$parameters["method"] = "sendMessage";
+	break;
+	
+	case 'video':
+	$parameters = array('chat_id' => $chatId, "video" => $response);
+	$parameters["method"] = "sendVideo";
+	break;
+}
+
 echo json_encode($parameters);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
