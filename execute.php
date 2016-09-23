@@ -22,6 +22,7 @@ $text = strtolower($text);
 
 $response = '';
 $caption = '';
+$type = "text";
 
 $randRes = array("NAGA",
 "Io no capire",
@@ -32,7 +33,14 @@ $randRes = array("NAGA",
 "Se non bestemmio, guarda!"
 );
 
-$type = "text";
+$randJoke = array("Prima ho girato l'angolo, poi l'ho rimesso a posto.",
+"Qual è il colmo per un muratore? Dover stare attendo al cemento armato!",
+"Attento, se mangi un avocado, finiscilo tutto, altrimenti ti fa causa! E' legale.",
+"Cosa fa un gallo in mezzo al mare? Galleggia.",
+"A casa ho un mobile che tutti credono sia antico. Penso sia solo un'antica credenza.",
+"Ho appena messo una bistecca alla destra del letto e una frittura di calamari a sinistra, perchè voglio addormentarmi tra 2 secondi.",
+"Per me il segno peggiore è la bilancia, si fa mettere i piedi in testa da tutti."
+);
 
 
 if(isset($message['text'])){
@@ -43,6 +51,9 @@ if(isset($message['text'])){
 	elseif(strpos($text, 'mouse') !== false){
 		$response = "Uso il NAGAAAAAAAA, ovvio.";
 	}
+	elseif(strpos($text, "battuta") !== false){
+		$response = $randJoke[rand(0, count($randJoke))];
+	}
 	elseif(strpos($text, "costantini") !== false){
 		$type = "video";
 		$response = new CURLFile(realpath("video_costa.mov"));
@@ -51,10 +62,10 @@ if(isset($message['text'])){
 	elseif(strpos($text, "vian") !== false){
 		$type = "foto";
 		$response = new CURLFile(realpath("vian.jpg"));
-		$caption = "Ou muso da merda!";
+		$caption = "Beo come el soe... de notte.";
 	}
 	else{
-		$response = $randRes[rand(0, 6)];
+		$response = $randRes[rand(0, count($randRes))];
 	}
 }
 elseif(isset($message['audio'])){
